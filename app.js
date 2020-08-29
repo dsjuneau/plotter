@@ -7,7 +7,7 @@ canvas.height = 800;
 //Select buttons and assign call back functions
 let coin = document.getElementById("btn-1");
 coin.addEventListener("click", () =>
-  plot(generateRandomSet(1000, 1000, "coin"))
+  plot(generateRandomSet(1000, 1000, "coin", 1000))
 );
 
 //Draw Grid on canvas
@@ -18,16 +18,23 @@ drawGrid();
  ****************************************************************/
 
 //Function generates a probability distrubution depending on the input
-const generateRandomSet = (arrayLength, iterations, type) => {
+const generateRandomSet = (arrayLength, iterations, type, typeNumber) => {
   const numSet = [];
   numSet.length = arrayLength;
   numSet.fill(0);
+  let normalNumSet = [];
   switch (type) {
     case "coin":
       for (i = 0; i < iterations; i++) {
-        let a = Math.floor(1000 * Math.random());
-        numSet[a] = numSet[a] + 1;
+        let count = 0;
+        for (j = 0; j < typeNumber; j++) {
+          let a = Math.floor(2 * Math.random());
+          count = count + a;
+        }
+        numSet[count] = numSet[count] + 1;
       }
+      normalNumSet = numSet.map((x) => x * 10);
+
       break;
     case "dice":
       for (i = 0; i < iterations; i++) {
@@ -38,9 +45,10 @@ const generateRandomSet = (arrayLength, iterations, type) => {
     default:
       throw new Error("Must pick an experiment type");
   }
-  let normal = numSet.reduce((a, b) => a + b, 0) / numSet.length / 600;
-  console.log(normal);
-  return numSet;
+  //let normal = numSet.reduce((a, b) => a + b, 0) / numSet.length / 600;
+  //console.log(normal);
+
+  return normalNumSet;
 };
 
 //Function plots the probability distribution
