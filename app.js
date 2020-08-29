@@ -11,7 +11,7 @@ canvas2.height = 800;
 //Select buttons and assign call back functions
 const coin = document.getElementById("btn-1");
 coin.addEventListener("click", () =>
-  plot(generateRandomSet(1000, 1000, "coin", 1000), c1)
+  plot2(generateRandomSet(100, 10000, "coin", 100), c1, 2)
 );
 
 const referenceCoin = document.getElementById("btn-3");
@@ -43,7 +43,7 @@ const generateRandomSet = (arrayLength, iterations, type, typeNumber) => {
         }
         numSet[count] = numSet[count] + 1;
       }
-      normalNumSet = numSet.map((x) => x * 10);
+      normalNumSet = numSet.map((x) => (x * 100) / iterations);
 
       break;
     case "dice":
@@ -97,7 +97,6 @@ const generateCoinSet = (numOfCoins) => {
     let numerator = fac(numOfCoins) / (fac(i) * fac(numOfCoins - i));
     numSet.push((100 * numerator) / denominator);
   }
-  console.log(numSet);
   return numSet;
 };
 
