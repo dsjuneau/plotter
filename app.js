@@ -1,17 +1,27 @@
 //Select canvas and set initial width
-let canvas = document.querySelector("canvas");
-let c = canvas.getContext("2d");
-canvas.width = 1200;
-canvas.height = 800;
+let canvas1 = document.getElementById("canvas-1");
+let canvas2 = document.getElementById("canvas-2");
+let c1 = canvas1.getContext("2d");
+let c2 = canvas2.getContext("2d");
+canvas1.width = 1200;
+canvas1.height = 800;
+canvas2.width = 1200;
+canvas2.height = 800;
 
 //Select buttons and assign call back functions
-let coin = document.getElementById("btn-1");
+const coin = document.getElementById("btn-1");
 coin.addEventListener("click", () =>
-  plot(generateRandomSet(1000, 1000, "coin", 1000))
+  plot(generateRandomSet(1000, 1000, "coin", 1000), c1)
 );
 
+const referenceCoin = document.getElementById("btn-3");
+referenceCoin.addEventListener("click", () => {
+  plot2();
+});
+
 //Draw Grid on canvas
-drawGrid();
+drawGrid(c1);
+drawGrid(c2);
 
 /* Callback functions for buttons  ******************************
  *****************************************************************
@@ -52,7 +62,7 @@ const generateRandomSet = (arrayLength, iterations, type, typeNumber) => {
 };
 
 //Function plots the probability distribution
-const plot = (numSet) => {
+const plot = (numSet, c) => {
   for (let i = 0; i < numSet.length; i++) {
     c.beginPath();
     c.moveTo(100 + i, 750);
@@ -61,8 +71,28 @@ const plot = (numSet) => {
     c.stroke();
   }
 };
+
+const plot2 = (numSet, c) => {
+  for (let i = 0; i < numSet.length; i++) {
+    c.beginPath();
+    c.moveTo(100 + i, 750);
+    c.lineTo(100 + i, 750 - numSet[i]);
+    c.strokeStyle = "blue";
+    c.stroke();
+  }
+};
+
+//Function creates a reference graph for coin flips
+
+const generateCoinSet = (arrayLength, iterations, numOfCoins) => {
+  const numSet = [];
+  numSet.length = arrayLength;
+  numSet.fill(0);
+  let normalNumSet = [];
+};
+
 //Function draws a grid on the canvas
-function drawGrid() {
+function drawGrid(c) {
   c.beginPath();
   c.moveTo(50, 50);
   c.lineTo(50, 751);
