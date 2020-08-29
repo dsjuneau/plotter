@@ -1,4 +1,5 @@
 //Select canvas and set initial width
+
 let canvas1 = document.getElementById("canvas-1");
 let canvas2 = document.getElementById("canvas-2");
 let c1 = canvas1.getContext("2d");
@@ -16,7 +17,19 @@ coin.addEventListener("click", () =>
 
 const referenceCoin = document.getElementById("btn-3");
 referenceCoin.addEventListener("click", () => {
-  plot2(generateCoinSet(100), c2, 2);
+  const coinSet = generateCoinSet(100);
+  plot2(coinSet, c2, 2);
+});
+
+const generateMove = document.getElementById("btn-4");
+generateMove.addEventListener("click", () => {
+  let count = 0;
+  for (j = 0; j < 100; j++) {
+    let a = Math.floor(2 * Math.random());
+    count = count + a;
+  }
+  console.log(count);
+  console.log(perc[count]);
 });
 
 //Draw Grid on canvas
@@ -100,6 +113,19 @@ const generateCoinSet = (numOfCoins) => {
   return numSet;
 };
 
+//Map the coin set array into an array that gives a percentage
+const cumulativePercentages = (numSet) => {
+  const cumulativeNumSet = [0];
+  for (i = 0; i < numSet.length; i++) {
+    if (i === 0) {
+      cumulativeNumSet[i] = numSet[i];
+    } else {
+      cumulativeNumSet[i] = cumulativeNumSet[i - 1] + numSet[i];
+    }
+  }
+  return cumulativeNumSet;
+};
+
 //Function draws a grid on the canvas
 function drawGrid(c) {
   c.beginPath();
@@ -136,3 +162,5 @@ function fac(n) {
     return n * fac(n - 1);
   }
 }
+
+const perc = cumulativePercentages(generateCoinSet(100));
