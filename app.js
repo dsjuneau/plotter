@@ -9,6 +9,27 @@ canvas1.height = 800;
 canvas2.width = 1200;
 canvas2.height = 800;
 
+const gaussTest = document.getElementById("btn-6");
+gaussTest.addEventListener("click", () => {
+  let gx =
+    (1 / Math.pow(2 * Math.PI * 0.04, 0.5)) *
+    Math.exp(-Math.pow(0.5, 2) / 0.08);
+  console.log(gx);
+});
+
+const easy = document.getElementById("btn-5");
+easy.addEventListener("click", () => {
+  console.log(gaussianRand(7));
+});
+
+//generate random gaussian number
+function gaussianRand(calls) {
+  var i = calls;
+  var res = 0;
+  while (i--) res += Math.random();
+  return res / calls;
+}
+
 //Select buttons and assign call back functions
 const coin = document.getElementById("btn-1");
 coin.addEventListener("click", () =>
