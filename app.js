@@ -73,14 +73,12 @@ const plot = (numSet, c) => {
 };
 
 const plot2 = (numSet, c) => {
-  const normalHeight = 750 / numSet.length;
   let addInterval = 0;
   const interval = Math.ceil(1000 / numSet.length) - 1;
-  console.log(interval);
   for (let i = 0; i < numSet.length; i++) {
     c.beginPath();
     c.moveTo(100 + addInterval + i, 750);
-    c.lineTo(100 + addInterval + i, 750 - numSet[i] * normalHeight);
+    c.lineTo(100 + addInterval + i, 750 - numSet[i] * 7);
     c.strokeStyle = "blue";
     c.stroke();
     addInterval = addInterval + interval;
@@ -94,7 +92,7 @@ const generateCoinSet = (numOfCoins) => {
   const denominator = Math.pow(2, numOfCoins);
   for (i = 0; i < numOfCoins + 1; i++) {
     let numerator = fac(numOfCoins) / (fac(i) * fac(numOfCoins - i));
-    numSet.push((numOfCoins * numerator) / denominator);
+    numSet.push((100 * numerator) / denominator);
   }
   console.log(numSet);
   return numSet;
