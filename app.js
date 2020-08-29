@@ -16,7 +16,7 @@ coin.addEventListener("click", () =>
 
 const referenceCoin = document.getElementById("btn-3");
 referenceCoin.addEventListener("click", () => {
-  plot2(generateCoinSet(100), c2, 1);
+  plot2(generateCoinSet(100), c2, 2);
 });
 
 //Draw Grid on canvas
@@ -49,7 +49,7 @@ const generateRandomSet = (arrayLength, iterations, type, typeNumber) => {
     case "dice":
       for (i = 0; i < iterations; i++) {
         let a = Math.floor(1000 * Math.random());
-        numSet[a] = numSet[a] + 1;
+        numSet[a] = numSet[a] + 2;
       }
       break;
     default:
@@ -73,11 +73,11 @@ const plot = (numSet, c) => {
 };
 
 const plot2 = (numSet, c, factor) => {
-  let interval = Math.ceil(1150 / numSet.length);
+  let interval = Math.ceil(1100 / numSet.length);
   let addInterval = interval / 2;
   interval = interval * factor;
 
-  const left = 600 - (numSet.length / 2) * interval;
+  const left = 600 + addInterval - (numSet.length / 2) * interval;
   for (let i = 0; i < numSet.length; i++) {
     c.beginPath();
     c.moveTo(left + addInterval, 750);
@@ -112,7 +112,7 @@ function drawGrid(c) {
 
   for (i = 1; i < 11; i++) {
     c.font = "16px Arial";
-    c.fillText(`${i * 10}%`, 3, 756 - (i / 10) * 700);
+    c.fillText(`${i * 5}%`, 3, 756 - (i / 10) * 700);
     c.beginPath();
     c.moveTo(45, 750 - (i / 10) * 700);
     c.lineTo(55, 750 - (i / 10) * 700);
