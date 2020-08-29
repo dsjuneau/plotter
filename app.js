@@ -15,6 +15,16 @@ const drawGrid = () => {
   c.lineTo(1150, 751);
   c.strokeStyle = "black";
   c.stroke();
+
+  for (i = 1; i < 11; i++) {
+    c.font = "16px Arial";
+    c.fillText(`${i * 10}%`, 3, 756 - (i / 10) * 700);
+    c.beginPath();
+    c.moveTo(45, 750 - (i / 10) * 700);
+    c.lineTo(55, 750 - (i / 10) * 700);
+    c.strokeStyle = "black";
+    c.stroke();
+  }
 };
 drawGrid();
 /* Callback functions for buttons  ******************************
