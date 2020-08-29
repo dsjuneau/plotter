@@ -16,7 +16,7 @@ coin.addEventListener("click", () =>
 
 const referenceCoin = document.getElementById("btn-3");
 referenceCoin.addEventListener("click", () => {
-  console.log(generateCoinSet(100));
+  plot2(generateCoinSet(100), c2);
 });
 
 //Draw Grid on canvas
@@ -73,12 +73,16 @@ const plot = (numSet, c) => {
 };
 
 const plot2 = (numSet, c) => {
+  let addInterval = 0;
+  const interval = Math.ceil(1000 / numSet.length) - 1;
+  console.log(interval);
   for (let i = 0; i < numSet.length; i++) {
     c.beginPath();
-    c.moveTo(100 + i, 750);
-    c.lineTo(100 + i, 750 - numSet[i]);
+    c.moveTo(100 + addInterval + i, 750);
+    c.lineTo(100 + addInterval + i, 750 - numSet[i] * 100);
     c.strokeStyle = "blue";
     c.stroke();
+    addInterval = addInterval + interval;
   }
 };
 
@@ -89,8 +93,9 @@ const generateCoinSet = (numOfCoins) => {
   const denominator = Math.pow(2, numOfCoins);
   for (i = 0; i < numOfCoins + 1; i++) {
     let numerator = fac(numOfCoins) / (fac(i) * fac(numOfCoins - i));
-    numSet.push(numerator / denominator);
+    numSet.push((numOfCoins * numerator) / denominator);
   }
+  console.log(numSet);
   return numSet;
 };
 
