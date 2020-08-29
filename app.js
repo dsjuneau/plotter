@@ -16,7 +16,7 @@ coin.addEventListener("click", () =>
 
 const referenceCoin = document.getElementById("btn-3");
 referenceCoin.addEventListener("click", () => {
-  plot2(generateCoinSet(100), c2);
+  plot2(generateCoinSet(100), c2, 1);
 });
 
 //Draw Grid on canvas
@@ -72,13 +72,16 @@ const plot = (numSet, c) => {
   }
 };
 
-const plot2 = (numSet, c) => {
-  let addInterval = 0;
-  const interval = Math.ceil(1000 / numSet.length) - 1;
+const plot2 = (numSet, c, factor) => {
+  let interval = Math.ceil(1150 / numSet.length);
+  let addInterval = interval / 2;
+  interval = interval * factor;
+
+  const left = 600 - (numSet.length / 2) * interval;
   for (let i = 0; i < numSet.length; i++) {
     c.beginPath();
-    c.moveTo(100 + addInterval + i, 750);
-    c.lineTo(100 + addInterval + i, 750 - numSet[i] * 7);
+    c.moveTo(left + addInterval, 750);
+    c.lineTo(left + addInterval, 750 - numSet[i] * 7 * factor);
     c.strokeStyle = "blue";
     c.stroke();
     addInterval = addInterval + interval;
