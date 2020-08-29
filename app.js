@@ -16,7 +16,7 @@ coin.addEventListener("click", () =>
 
 const referenceCoin = document.getElementById("btn-3");
 referenceCoin.addEventListener("click", () => {
-  plot2();
+  console.log(generateCoinSet(100));
 });
 
 //Draw Grid on canvas
@@ -84,11 +84,14 @@ const plot2 = (numSet, c) => {
 
 //Function creates a reference graph for coin flips
 
-const generateCoinSet = (arrayLength, iterations, numOfCoins) => {
+const generateCoinSet = (numOfCoins) => {
   const numSet = [];
-  numSet.length = arrayLength;
-  numSet.fill(0);
-  let normalNumSet = [];
+  const denominator = Math.pow(2, numOfCoins);
+  for (i = 0; i < numOfCoins + 1; i++) {
+    let numerator = fac(numOfCoins) / (fac(i) * fac(numOfCoins - i));
+    numSet.push(numerator / denominator);
+  }
+  return numSet;
 };
 
 //Function draws a grid on the canvas
@@ -115,4 +118,15 @@ function drawGrid(c) {
   c.strokeStyle = "black";
   c.stroke();
   c.fillText(`Mean`, 578, 775);
+}
+
+//Factorial function
+function fac(n) {
+  //base case
+  if (n == 0 || n == 1) {
+    return 1;
+    //recursive case
+  } else {
+    return n * fac(n - 1);
+  }
 }
