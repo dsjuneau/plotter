@@ -5,9 +5,14 @@ canvas.width = 1200;
 canvas.height = 800;
 
 //Select buttons and assign call back functions
+let coin = document.getElementById("btn-1");
+coin.addEventListener("click", () =>
+  plot(generateRandomSet(1000, 1000, "coin"))
+);
 
 //Draw Grid on canvas
 drawGrid();
+
 /* Callback functions for buttons  ******************************
  *****************************************************************
  ****************************************************************/
@@ -39,11 +44,11 @@ const generateRandomSet = (arrayLength, iterations, type) => {
 };
 
 //Function plots the probability distribution
-const plot1 = (numSet, normal) => {
+const plot = (numSet) => {
   for (let i = 0; i < numSet.length; i++) {
     c.beginPath();
-    c.moveTo(100 + i, 800);
-    c.lineTo(100 + i, 800 - numSet[i] / normal);
+    c.moveTo(100 + i, 750);
+    c.lineTo(100 + i, 750 - numSet[i]);
     c.strokeStyle = "blue";
     c.stroke();
   }
